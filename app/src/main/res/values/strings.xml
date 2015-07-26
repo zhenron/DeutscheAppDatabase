@@ -1,0 +1,135 @@
+<resources>
+    <string name="app_name">DeutscheAppDatabase</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="my_substantiven">
+        <item>m Vater</item>
+        <item>f Mutter</item>
+        <item>n Baby</item>
+        <item>p Eltern</item>
+    </string-array>
+
+    <string-array name="my_adjektiven">
+        <item>aktiv</item>
+        <item>alt</item>
+        <item>arm</item>
+        <item>ärgerlich</item>
+        <item>bekannt</item>
+        <item>berühmt</item>
+        <item>billig</item>
+        <item>böse</item>
+        <item>breit</item>
+        <item>bunt</item>
+        <item>dunkel</item>
+        <item>durstig</item>
+        <item>dünn</item>
+        <item>eilig</item>
+        <item>einfach</item>
+        <item>eng</item>
+        <item>falsch</item>
+        <item>faul</item>
+        <item>fest</item>
+        <item>feucht</item>
+        <item>flach</item>
+        <item>fleißig</item>
+        <item>freundlich</item>
+        <item>froh</item>
+        <item>furchtbar</item>
+        <item>geduldig</item>
+        <item>gefährlich</item>
+        <item>geizig</item>
+        <item>gern</item>
+        <item>gestreift</item>
+        <item>gesund</item>
+        <item>gewellt</item>
+        <item>glatt</item>
+        <item>groß</item>
+        <item>gut</item>
+        <item>hart</item>
+        <item>hässlich</item>
+        <item>hell</item>
+        <item>hellblond</item>
+        <item>herrlich</item>
+        <item>höflich</item>
+        <item>hungrig</item>
+        <item>hübsch</item>
+        <item>jung</item>
+        <item>kalt</item>
+        <item>kariert</item>
+        <item>klar</item>
+        <item>klein</item>
+        <item>korrekt</item>
+        <item>krank</item>
+        <item>kurz</item>
+        <item>lang</item>
+        <item>langsam</item>
+        <item>laut</item>
+        <item>leer</item>
+        <item>leicht</item>
+        <item>leise</item>
+        <item>lieb</item>
+        <item>locker</item>
+        <item>lockig</item>
+        <item>lustig</item>
+        <item>modern</item>
+        <item>mutig</item>
+        <item>müde</item>
+        <item>nah</item>
+        <item>nass</item>
+        <item>nett</item>
+        <item>neu</item>
+        <item>neugierig</item>
+        <item>offen</item>
+        <item>oval</item>
+        <item>platt</item>
+        <item>reich</item>
+        <item>richtig</item>
+        <item>riesengroß</item>
+        <item>riesig</item>
+        <item>ruhig</item>
+        <item>rund</item>
+        <item>satt</item>
+        <item>sauber</item>
+        <item>sauer</item>
+        <item>scharf</item>
+        <item>schick</item>
+        <item>schlank</item>
+        <item>schlecht</item>
+        <item>schmal</item>
+        <item>schmerzhaft</item>
+        <item>schmutzig</item>
+        <item>schnell</item>
+        <item>schön</item>
+        <item>schwach</item>
+        <item>schwer</item>
+        <item>spät</item>
+        <item>spitz</item>
+        <item>stark</item>
+        <item>steif</item>
+        <item>still</item>
+        <item>stolz</item>
+        <item>streng</item>
+        <item>süß</item>
+        <item>teuer</item>
+        <item>tief</item>
+        <item>tot</item>
+        <item>traurig</item>
+        <item>trocken</item>
+        <item>tüchtig</item>
+        <item>unfreundlich</item>
+        <item>vernünftig</item>
+        <item>viel</item>
+        <item>voll</item>
+        <item>vorsichtig</item>
+        <item>warm</item>
+        <item>weich</item>
+        <item>weit</item>
+        <item>wunderbar</item>
+        <item>wunderschön</item>
+        <item>zornig</item>
+        <item>zufrieden</item>
+    </string-array>
+
+</resources>

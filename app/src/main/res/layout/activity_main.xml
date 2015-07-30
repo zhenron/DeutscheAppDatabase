@@ -1,11 +1,224 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
+    <TextView
+        android:text="@string/adj_dek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textSize="30sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kasus"
+                android:textSize="30sp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/kasus0_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/kasus1_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/kasus2_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"/>
+
+            <TextView
+                android:id="@+id/kasus3_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/adjektiv_id"
+            android:text="nett"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/substantiv_id"
+            android:text="der Vater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/artikel1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="der"/>
+
+                <RadioButton
+                    android:id="@+id/artikel2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="den"/>
+
+                <RadioButton
+                    android:id="@+id/artikel3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="dem"/>
+
+                <RadioButton
+                    android:id="@+id/artikel4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="des"/>
+
+                <RadioButton
+                    android:id="@+id/artikel5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="die"/>
+
+                <RadioButton
+                    android:id="@+id/artikel6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="das"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/adjektiv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-e"/>
+
+                <RadioButton
+                    android:id="@+id/adjektiv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-en"/>
+
+                <RadioButton
+                    android:id="@+id/adjektiv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
+
+                <RadioButton
+                    android:id="@+id/adjektiv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
+
+                <RadioButton
+                    android:id="@+id/adjektiv5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
+            </RadioGroup>
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/substantiv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-s"/>
+
+                <RadioButton
+                    android:id="@+id/substantiv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-es"/>
+
+                <RadioButton
+                    android:id="@+id/substantiv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"/>
+
+                <RadioButton
+                    android:id="@+id/substantiv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="n"/>
+            </RadioGroup>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_hide"
+        android:text="Hide radio button!"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="HideRadioButton"/>
+
+    <Button
+        android:id="@+id/button_next"
+        android:text="next"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-</RelativeLayout>
+</LinearLayout>

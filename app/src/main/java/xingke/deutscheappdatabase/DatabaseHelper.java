@@ -16,9 +16,11 @@ import java.util.List;
  C:\Users\Xingke\AppData\Local\Android\sdk\platform-tools
  adb shell
  run-as com.your.packagename
- run-as xingke.deutscheappdatabase;
+ run-as xingke.deutscheappdatabase
  cp /data/data/com.your.pacakagename/
- cd /data/data/xingke.deutscheappdatabase;
+ cd /data/data/xingke.deutscheappdatabase/databases
+ rm DeutscheAppDatabase
+ rm DeutscheAppDatabase-journal
 
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -35,16 +37,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Table Names
     private static final String TABLE_ADJEKTIV = "adjektiven";
     private static final String TABLE_SUBSTANTIV = "substantiv";
+    private static final String TABLE_STATISTICS = "statistics";
 
     // Common column names
     private static final String KEY_ID = "id";
+    private static final String KEY_ARTIKEL = "artikel";
 
     // ADJEKTIVEN Table - column names
     private static final String KEY_ADJEKTIV = "adjektiv";
 
-    // SUBSTANTIVEN Table - column nmaes
-    private static final String KEY_ARTIKEL = "artikel";
+    // SUBSTANTIVEN Table - column names
     private static final String KEY_SUBSTANTIV = "substantiv";
+
+    // STATISTICS Table - column names
+    private static final String KEY_KASUS = "kasus";
+    private static final String KEY_GENUS = "genus";
+    private static final String KEY_DEK_ART = "dek_art";
+    private static final String KEY_DEK_ADJ = "dek_adj";
+    private static final String KEY_DEK_SUB = "dek_sub";
+    private static final String KEY_OCCURRENCES = "occurrences";
+    private static final String KEY_RIGHTS = "rights";
+    private static final String KEY_WRONGS = "wrongs";
+    private static final String KEY_SUCCESS_RATE = "success_rate";
 
     // Table Create Statements
     // Adjektiv table create statement
@@ -60,6 +74,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + KEY_ARTIKEL + " TEXT,"
             + KEY_SUBSTANTIV + " TEXT" + ")";
 
+    // Statistics table create statement
+    private static final String CREATE_TABLE_STATISTICS = "CREATE TABLE "
+            + TABLE_STATISTICS + "("
+            + KEY_ID + " INTEGER PRIMARY KEY,"
+            + KEY_ARTIKEL + " TEXT,"
+            + KEY_KASUS + " TEXT,"
+            + KEY_GENUS + " TEXT,"
+            + KEY_DEK_ART + " TEXT,"
+            + KEY_DEK_ADJ + " TEXT,"
+            + KEY_DEK_SUB + " TEXT,"
+            + KEY_OCCURRENCES + " INTEGER,"
+            + KEY_RIGHTS + " INTEGER,"
+            + KEY_WRONGS + " INTEGER,"
+            + KEY_SUCCESS_RATE + " REAL" + ")";
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -70,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // creating required tables
         db.execSQL(CREATE_TABLE_ADJEKTIV);
         db.execSQL(CREATE_TABLE_SUBSTANTIV);
+        db.execSQL(CREATE_TABLE_STATISTICS);
     }
 
     @Override
@@ -78,6 +108,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // on upgrade drop older tables
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADJEKTIV);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SUBSTANTIV);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_STATISTICS);
 
         // create new tables
         onCreate(db);
@@ -321,11 +352,205 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    /*
+    * Creating an Statistic
+    */
+    public long createStatistic(Statistic statistic){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ARTIKEL, statistic.getArtikel());
+        values.put(KEY_KASUS, statistic.getKasus());
+        values.put(KEY_GENUS, statistic.getGenus());
+        values.put(KEY_DEK_ART, statistic.getDek_art());
+        values.put(KEY_DEK_ADJ, statistic.getDek_adj());
+        values.put(KEY_DEK_SUB, statistic.getDek_sub());
+        values.put(KEY_OCCURRENCES, statistic.getOccurrences());
+        values.put(KEY_RIGHTS, statistic.getRights());
+        values.put(KEY_WRONGS, statistic.getWrongs());
+        values.put(KEY_SUCCESS_RATE, statistic.getSuccess_rate());
+
+        // insert row
+        long statistic_id = db.insert(TABLE_STATISTICS, null, values);
+
+        return statistic_id; //-1 if error, id if success
+    }
+
+    /*
+    * get single Statistic
+    */
+    public Statistic getStatistic(long statistic_id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String selectQuery = "SELECT  * FROM " + TABLE_STATISTICS + " WHERE "
+                + KEY_ID + " = " + statistic_id;
+
+        Log.e(LOG, selectQuery);
+
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        if (c != null)
+            c.moveToFirst();
+
+        Statistic statistic = new Statistic();
+        statistic.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+        statistic.setArtikel(c.getString(c.getColumnIndex(KEY_ARTIKEL)));
+        statistic.setKasus(c.getString(c.getColumnIndex(KEY_KASUS)));
+        statistic.setGenus(c.getString(c.getColumnIndex(KEY_GENUS)));
+        statistic.setDek_art(c.getString(c.getColumnIndex(KEY_DEK_ART)));
+        statistic.setDek_adj(c.getString(c.getColumnIndex(KEY_DEK_ADJ)));
+        statistic.setDek_sub(c.getString(c.getColumnIndex(KEY_DEK_SUB)));
+        statistic.setOccurrences(c.getInt(c.getColumnIndex(KEY_OCCURRENCES)));
+        statistic.setRights(c.getInt(c.getColumnIndex(KEY_RIGHTS)));
+        statistic.setWrongs(c.getInt(c.getColumnIndex(KEY_WRONGS)));
+        statistic.setSuccess_rate(c.getDouble(c.getColumnIndex(KEY_SUCCESS_RATE)));
+
+        return statistic;
+    }
+
+    /*
+    Getting statistics itself
+     */
+    public List<MyStatistic> getStatistics(){
+        List<MyStatistic> myStatistics = new ArrayList<MyStatistic>();
+        String selectQuery = "SELECT  * FROM " + TABLE_STATISTICS;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                MyStatistic myStatistic = new MyStatistic();
+                myStatistic.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+                myStatistic.setRate(c.getDouble(c.getColumnIndex(KEY_SUCCESS_RATE)));
+
+                // adding to myStatistics list
+                myStatistics.add(myStatistic);
+            } while (c.moveToNext());
+        }
+
+        return myStatistics;
+    }
+
+    /*
+    * getting all Statistics
+    */
+    public List<Statistic> getAllStatistics() {
+        List<Statistic> statistics = new ArrayList<Statistic>();
+        String selectQuery = "SELECT  * FROM " + TABLE_STATISTICS;
+
+        Log.e(LOG, selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                Statistic statistic = new Statistic();
+                statistic.setId(c.getInt(c.getColumnIndex(KEY_ID)));
+                statistic.setArtikel(c.getString(c.getColumnIndex(KEY_ARTIKEL)));
+                statistic.setKasus(c.getString(c.getColumnIndex(KEY_KASUS)));
+                statistic.setGenus(c.getString(c.getColumnIndex(KEY_GENUS)));
+                statistic.setDek_art(c.getString(c.getColumnIndex(KEY_DEK_ART)));
+                statistic.setDek_adj(c.getString(c.getColumnIndex(KEY_DEK_ADJ)));
+                statistic.setDek_sub(c.getString(c.getColumnIndex(KEY_DEK_SUB)));
+                statistic.setOccurrences(c.getInt(c.getColumnIndex(KEY_OCCURRENCES)));
+                statistic.setRights(c.getInt(c.getColumnIndex(KEY_RIGHTS)));
+                statistic.setWrongs(c.getInt(c.getColumnIndex(KEY_WRONGS)));
+                statistic.setSuccess_rate(c.getDouble(c.getColumnIndex(KEY_SUCCESS_RATE)));
+
+                // adding to statistics list
+                statistics.add(statistic);
+            } while (c.moveToNext());
+        }
+
+        return statistics;
+    }
+
+    /*
+    * Updating a Statistic
+    */
+    public int updateStatistic(Statistic statistic) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_ARTIKEL, statistic.getArtikel());
+        values.put(KEY_KASUS, statistic.getKasus());
+        values.put(KEY_GENUS, statistic.getGenus());
+        values.put(KEY_DEK_ART, statistic.getDek_art());
+        values.put(KEY_DEK_ADJ, statistic.getDek_adj());
+        values.put(KEY_DEK_SUB, statistic.getDek_sub());
+        values.put(KEY_OCCURRENCES, statistic.getOccurrences());
+        values.put(KEY_RIGHTS, statistic.getRights());
+        values.put(KEY_WRONGS, statistic.getWrongs());
+        values.put(KEY_SUCCESS_RATE, statistic.getSuccess_rate());
+
+        // updating row
+        return db.update(TABLE_STATISTICS, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(statistic.getId()) });
+    }
+
+    /*
+    * Deleting a Statistic
+    */
+    public void deleteStatistic(long statistic_id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_STATISTICS, KEY_ID + " = ?",
+                new String[]{String.valueOf(statistic_id)});
+    }
+
+    /*
+    * Deleting All Statistics
+    */
+    public void deleteAllStatistics() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_STATISTICS, null, null);
+    }
+
+    /*
+    * * getting Statistics count
+    */
+    public int getStatisticsCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_STATISTICS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+
+        int count = cursor.getCount();
+        cursor.close();
+
+        // return count
+        return count;
+    }
+
     // closing database
     public void closeDB() {
         SQLiteDatabase db = this.getReadableDatabase();
         if (db != null && db.isOpen())
             db.close();
+    }
+
+    /*
+    Getting the ids of Substantiven by Genus
+    */
+    public ArrayList<Integer> getSubstantivenIdsByGenus(String genus){
+        ArrayList<Integer> mySubstantivenIds = new ArrayList<Integer>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.query(TABLE_SUBSTANTIV, new String[]{KEY_ID,
+                        KEY_ARTIKEL, KEY_SUBSTANTIV}, KEY_ARTIKEL + "=?",
+                new String[]{genus}, null, null, null, null);
+
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                // adding to myStatistics list
+                mySubstantivenIds.add(c.getInt(c.getColumnIndex(KEY_ID)));
+            } while (c.moveToNext());
+        }
+
+        return mySubstantivenIds;
     }
 
 }

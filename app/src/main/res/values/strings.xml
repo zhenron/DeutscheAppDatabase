@@ -3,12 +3,26 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="adj_dek">Adjektivdeklination</string>
+    <string name="kasus">Kasus</string>
 
     <string-array name="my_substantiven">
         <item>m Vater</item>
         <item>f Mutter</item>
         <item>n Baby</item>
         <item>p Eltern</item>
+        <item>m Sohn</item>
+        <item>n Zeug</item>
+        <item>n Auto</item>
+        <item>f Auge</item>
+        <item>n Haus</item>
+        <item>f Tochter</item>
+        <item>p Augen</item>
+        <item>f Tur</item>
+        <item>m Komputer</item>
+        <item>p Tische</item>
+        <item>p Flugzeug</item>
+        <item>m Kater</item>
     </string-array>
 
     <string-array name="my_adjektiven">
@@ -130,6 +144,159 @@
         <item>wunderschön</item>
         <item>zornig</item>
         <item>zufrieden</item>
+    </string-array>
+
+    <string-array name="my_dek_art">
+        <item>der</item>
+        <item>die</item>
+        <item>das</item>
+        <item>die</item>
+        <item>den</item>
+        <item>die</item>
+        <item>das</item>
+        <item>die</item>
+        <item>dem</item>
+        <item>der</item>
+        <item>dem</item>
+        <item>den</item>
+        <item>des</item>
+        <item>der</item>
+        <item>des</item>
+        <item>der</item>
+        <item>ein</item>
+        <item>eine</item>
+        <item>ein</item>
+        <item>-</item>
+        <item>einen</item>
+        <item>eine</item>
+        <item>ein</item>
+        <item>-</item>
+        <item>einem</item>
+        <item>einer</item>
+        <item>einem</item>
+        <item>-</item>
+        <item>eines</item>
+        <item>einer</item>
+        <item>eines</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+    </string-array>
+
+    <string-array name="my_dek_adj">
+        <item>e</item>
+        <item>e</item>
+        <item>e</item>
+        <item>en</item>
+        <item>en</item>
+        <item>e</item>
+        <item>e</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>er</item>
+        <item>e</item>
+        <item>es</item>
+        <item>-</item>
+        <item>en</item>
+        <item>e</item>
+        <item>es</item>
+        <item>-</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>-</item>
+        <item>en</item>
+        <item>en</item>
+        <item>en</item>
+        <item>-</item>
+        <item>er</item>
+        <item>e</item>
+        <item>es</item>
+        <item>e</item>
+        <item>en</item>
+        <item>e</item>
+        <item>es</item>
+        <item>e</item>
+        <item>em</item>
+        <item>er</item>
+        <item>em</item>
+        <item>en</item>
+        <item>en</item>
+        <item>er</item>
+        <item>en</item>
+        <item>er</item>
+    </string-array>
+
+    <string-array name="my_dek_sub">
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>n</item>
+        <item>s</item>
+        <item>-</item>
+        <item>es</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>s</item>
+        <item>-</item>
+        <item>es</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>n</item>
+        <item>s</item>
+        <item>-</item>
+        <item>es</item>
+        <item>-</item>
     </string-array>
 
 </resources>

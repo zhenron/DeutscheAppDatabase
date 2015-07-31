@@ -1,6 +1,8 @@
 package xingke.deutscheappdatabase;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -36,15 +38,17 @@ public class MainActivity extends Activity {
     private String[] endungen_adj = {"-e","-en", "-es", "-er", "-em"};
     private String[] endungen_sub = {"-n","-s","-es", "-"};
     private String artikel_case, kasus_case, genus_case;
-    private int n_kasus;
+    private int n_kasus, rdm_subs_id, myCase;
     private ArrayList<Integer> myMaskulinenIds, myFemininumIds, myNeutrumIds, myPluralIds;          //For storing the ids by genus
+    private String selected_sub, selected_adj, rb_selectedArtikel, rb_selectedAdjektiv, rb_selectedSubstantiv;
 
     //Texts Views
     private TextView tv_kasus0, tv_kasus1, tv_kasus2, tv_kasus3, tv_adjektiv, tv_substantiv;
     private RadioButton rb_artikel1, rb_artikel2, rb_artikel3, rb_artikel4, rb_artikel5, rb_artikel6;
     private RadioButton rb_adjektiv1, rb_adjektiv2, rb_adjektiv3, rb_adjektiv4, rb_adjektiv5;
     private RadioButton rb_substantiv1, rb_substantiv2,rb_substantiv3,rb_substantiv4;
-    private Button b_next;
+    //private RadioGroup rg_artikel,rg_substantiv,rg_adjektiv;
+    private Button b_next, b_check;
     private Random random;
 
 
@@ -85,7 +89,7 @@ public class MainActivity extends Activity {
         rb_adjektiv2.setText(endungen_adj[1]);
         rb_adjektiv3.setText(endungen_adj[2]);
         rb_adjektiv4.setText(endungen_adj[3]);
-        rb_adjektiv4.setText(endungen_adj[4]);
+        rb_adjektiv5.setText(endungen_adj[4]);
 
         //Setting SubstantivenEndungen in Radiobuttons
         rb_substantiv1.setText(endungen_sub[0]);
@@ -94,6 +98,7 @@ public class MainActivity extends Activity {
         rb_substantiv4.setText(endungen_sub[3]);
 
         b_next = (Button) findViewById(R.id.button_next);
+        b_check = (Button) findViewById(R.id.button_check);
 
         random = new Random();
 
@@ -147,24 +152,24 @@ public class MainActivity extends Activity {
         n_kasus = db.getStatisticsCount();                      //Get the number of kasus
         myStatistics = db.getStatistics();                     //Get myStatistics
         statistics = db.getAllStatistics();                     //Get all the statistics table
-        sortStatistics();                                       //Sort MyStatistics
-        int my_case = chooseCase();
-        artikel_case = statistics.get(my_case-1).getArtikel();
-        kasus_case = statistics.get(my_case-1).getKasus();
-        genus_case = statistics.get(my_case-1).getGenus();
 
-        tv_kasus0.setText(Integer.toString(my_case));
-        tv_kasus1.setText(artikel_case);
-        tv_kasus2.setText(kasus_case);
-        tv_kasus3.setText(genus_case);
+        /*
+        =========================================
+         */
+        NextCase();
+        /*
+        =========================================
+         */
+
 
         //Toast.makeText(getApplicationContext(),
-        //        "Arraylist Maskulinum contains: " + myFemininumIds.toString(), Toast.LENGTH_LONG).show();
+        //        db.getSubstantiv(random.nextInt(myMaskulinenIds.size())).getArtikel() + " "
+        //                + db.getSubstantiv(random.nextInt(myMaskulinenIds.size())).getSubstantiv(), Toast.LENGTH_LONG).show();
 
         //Toast.makeText(getApplicationContext(),
         //       Integer.toString(my_case) + "/16=" + Integer.toString(my_case/16) + " - artikel: " + artikel_case + ", kasus: " + kasus_case + ", genus: " + genus_case, Toast.LENGTH_LONG).show();
 
-        setRadioButtons(my_case);
+
 
         //tv_adjektiv.setText((db.getAdjektiv(34)).getAdjektiv());
         //tv_substantiv.setText((db.getSubstantiv(3)).getSubstantiv());
@@ -204,7 +209,6 @@ public class MainActivity extends Activity {
         List<Adjketiv> adjektiven = db.getAllAdjektiven();
         // Querying all Substantiven
         List<Substantiv> substantiven = db.getAllSunstantiven();
-
         // Print out Adjektiven properties
         for (Adjketiv adjketiv : adjektiven) {
             String log = "Id: " + adjketiv.getId() +
@@ -216,22 +220,21 @@ public class MainActivity extends Activity {
 //                    log, Toast.LENGTH_SHORT).show();
 //            db.deleteTodoItem(ti)
         }
-
         // Print out Substantiv properties
+        int count_subs = db.getSubstantivCount();
+        // Querying all Substantiven
+        List<Substantiv> substantiven = db.getAllSunstantiven();
         for (Substantiv substantiv : substantiven) {
             String log = "Id: " + substantiv.getId() +
                     "/" + Integer.toString(count_subs) +
                     ", Artikel: " + substantiv.getArtikel() +
                     ", Substantiv: " + substantiv.getSubstantiv();
             // Writing Adjektiven to log
-            //Log.d("AllSubstantiven", log);
+            Log.d("AllSubstantiven", log);
             //Toast.makeText(getApplicationContext(),
             //        log, Toast.LENGTH_SHORT).show();
             //db.deleteTodoItem(ti)
         }
-
-
-
         int count_stats = db.getStatisticsCount();
         // Print out Statistics properties
         for (Statistic statistic : statistics) {
@@ -258,17 +261,17 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                sortStatistics();                                       //Sort MyStatistics
-                int my_case = chooseCase();
-                artikel_case = statistics.get(my_case-1).getArtikel();
-                kasus_case = statistics.get(my_case-1).getKasus();
-                genus_case = statistics.get(my_case-1).getGenus();
+                /*
+                =========================================
+                 */
+                        NextCase();
+                /*
+                =========================================
+                 */
 
-                tv_kasus0.setText(Integer.toString(my_case));
-                tv_kasus1.setText(artikel_case);
-                tv_kasus2.setText(kasus_case);
-                tv_kasus3.setText(genus_case);
-                setRadioButtons(my_case);
+                //Toast.makeText(getApplicationContext(),
+                //        db.getSubstantiv(random.nextInt(myMaskulinenIds.size())).getArtikel() + " "
+                //               + db.getSubstantiv(random.nextInt(myMaskulinenIds.size())).getSubstantiv(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -276,8 +279,122 @@ public class MainActivity extends Activity {
         db.closeDB();
     }
 
-    public void HideRadioButton(View view){
-        rb_artikel6.setVisibility(View.INVISIBLE);
+    public void onButtonCheckClicked(View view){
+        int my_fcase = (myCase - 1) / 16;
+        int check = 0b000;
+        String title, message;
+        String myFckArtikel = statistics.get(myCase - 1).getDek_art();
+        String myFckAdjektiv = statistics.get(myCase - 1).getDek_adj();
+        String myFckSubstantiv = statistics.get(myCase - 1).getDek_sub();
+        String art_dek, adj_endung = "", sub_endung = "";
+
+        if(my_fcase == 2){}
+        else if(rb_selectedArtikel.equals(myFckArtikel)){           //bitwise AND &, bitwise exclusive OR ^, bitwise inclusive OR |
+            //Toast.makeText(getApplicationContext(),
+            //        "artikel korrekt", Toast.LENGTH_SHORT).show();
+            check = check | 0b001;
+        }
+
+        if(rb_selectedAdjektiv.equals(myFckAdjektiv)){
+            //Toast.makeText(getApplicationContext(),
+            //        "adjektiv korrekt", Toast.LENGTH_SHORT).show();
+            check = check | 0b010;
+        }
+
+        if(rb_selectedSubstantiv.equals(myFckSubstantiv)){
+            //Toast.makeText(getApplicationContext(),
+            //        "substantiv korrekt", Toast.LENGTH_SHORT).show();
+            check = check | 0b100;
+        }
+
+        for(int i = 0; i < myFckAdjektiv.length() - 1; i++){
+            adj_endung += myFckAdjektiv.charAt(i+1);
+        }
+        for(int i = 0; i < myFckSubstantiv.length() - 1; i++){
+            sub_endung += myFckSubstantiv.charAt(i+1);
+        }
+        if(myFckArtikel.length() == 1){
+            art_dek = "";
+        }
+        else{
+            art_dek = myFckArtikel.toString();
+        }
+
+        message = art_dek + " " + selected_adj + adj_endung + " " + db.getSubstantiv(rdm_subs_id).getSubstantiv() + sub_endung;
+
+        if(check == 0b111){       //Correct!
+            title = "Korrekt!";
+        }
+        else{
+            title = "Falsch! :(";
+        }
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        // set title
+        alertDialogBuilder.setTitle(title);
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("Nächste",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        sortStatistics();                                       //Sort MyStatistics
+                        myCase = chooseCase();
+                        artikel_case = statistics.get(myCase - 1).getArtikel();
+                        kasus_case = statistics.get(myCase - 1).getKasus();
+                        genus_case = statistics.get(myCase - 1).getGenus();
+
+                        tv_kasus0.setText(Integer.toString(myCase));
+                        tv_kasus1.setText(artikel_case);
+                        tv_kasus2.setText(kasus_case);
+                        tv_kasus3.setText(genus_case);
+
+                        setRadioButtons(myCase);
+
+                        if(genus_case.equals("maskulinum")){               //{"maskulinum", "femininum", "neutrum", "plural"};
+                            rdm_subs_id = random.nextInt(myMaskulinenIds.size());
+                            rdm_subs_id = myMaskulinenIds.get(rdm_subs_id);
+                            selected_sub = "der " + db.getSubstantiv(rdm_subs_id).getSubstantiv();
+                        }
+                        else if(genus_case.equals("femininum")){
+                            rdm_subs_id = random.nextInt(myFemininumIds.size());
+                            rdm_subs_id = myFemininumIds.get(rdm_subs_id);
+                            selected_sub = "die " + db.getSubstantiv(rdm_subs_id).getSubstantiv();
+                        }
+                        else if(genus_case.equals("neutrum")){
+                            rdm_subs_id = random.nextInt(myNeutrumIds.size());
+                            rdm_subs_id = myNeutrumIds.get(rdm_subs_id);
+                            selected_sub = "das " + db.getSubstantiv(rdm_subs_id).getSubstantiv();
+                        }
+                        else if(genus_case.equals("plural")){
+                            rdm_subs_id = random.nextInt(myPluralIds.size());
+                            rdm_subs_id = myPluralIds.get(rdm_subs_id);
+                            selected_sub = "die " + db.getSubstantiv(rdm_subs_id).getSubstantiv();
+                        }
+
+                        selected_adj = db.getAdjektiv(random.nextInt(db.getAdjektivCount()) + 1).getAdjektiv();
+
+                        tv_substantiv.setText(selected_sub);
+                        tv_adjektiv.setText(selected_adj);
+
+                    }
+                })
+                .setNegativeButton("Zurück",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+
     }
 
     @Override
@@ -344,17 +461,12 @@ public class MainActivity extends Activity {
                 rb_artikel4.setVisibility(View.VISIBLE);
                 rb_artikel5.setVisibility(View.VISIBLE);
                 rb_artikel6.setVisibility(View.VISIBLE);
-                //rb_adjektiv3.setVisibility(View.INVISIBLE);
-                //rb_adjektiv4.setVisibility(View.INVISIBLE);
-                //rb_adjektiv5.setVisibility(View.INVISIBLE);
                 rb_artikel1.setText(bes_artikeln[0]);
                 rb_artikel2.setText(bes_artikeln[1]);
                 rb_artikel3.setText(bes_artikeln[2]);
                 rb_artikel4.setText(bes_artikeln[3]);
                 rb_artikel5.setText(bes_artikeln[4]);
                 rb_artikel6.setText(bes_artikeln[5]);
-                //rb_adjektiv1.setText(endungen_adj[0]);                     // {"-e","-en", "-es", "-er", "-em"};
-                //rb_adjektiv2.setText(endungen_adj[1]);
                 //Toast.makeText(getApplicationContext(),
                 //       "Bestimmtem Artikel case", Toast.LENGTH_SHORT).show();
                 break;
@@ -366,21 +478,12 @@ public class MainActivity extends Activity {
                 rb_artikel4.setVisibility(View.VISIBLE);
                 rb_artikel5.setVisibility(View.VISIBLE);
                 rb_artikel6.setVisibility(View.VISIBLE);
-                //rb_adjektiv3.setVisibility(View.VISIBLE);
-                //rb_adjektiv4.setVisibility(View.VISIBLE);
-                //rb_adjektiv5.setVisibility(View.INVISIBLE);
                 rb_artikel1.setText(unbes_artikeln[0]);
                 rb_artikel2.setText(unbes_artikeln[1]);
                 rb_artikel3.setText(unbes_artikeln[2]);
                 rb_artikel4.setText(unbes_artikeln[3]);
                 rb_artikel5.setText(unbes_artikeln[4]);
                 rb_artikel6.setText(unbes_artikeln[5]);
-                //rb_adjektiv1.setText(endungen_adj[0]);                     // {"-e","-en", "-es", "-er", "-em"};
-                //rb_adjektiv2.setText(endungen_adj[1]);
-                //rb_adjektiv3.setText(endungen_adj[2]);
-                //rb_adjektiv4.setText(endungen_adj[3]);
-
-
                 //Toast.makeText(getApplicationContext(),
                 //        "Unbestimmtem Artikel case", Toast.LENGTH_SHORT).show();
                 break;
@@ -392,14 +495,6 @@ public class MainActivity extends Activity {
                 rb_artikel4.setVisibility(View.INVISIBLE);
                 rb_artikel5.setVisibility(View.INVISIBLE);
                 rb_artikel6.setVisibility(View.INVISIBLE);
-                //rb_adjektiv3.setVisibility(View.VISIBLE);
-                //rb_adjektiv4.setVisibility(View.VISIBLE);
-                //rb_adjektiv5.setVisibility(View.VISIBLE);
-                //rb_adjektiv1.setText(endungen_adj[0]);                     // {"-e","-en", "-es", "-er", "-em"};
-                //rb_adjektiv2.setText(endungen_adj[1]);
-                //rb_adjektiv3.setText(endungen_adj[2]);
-                //rb_adjektiv4.setText(endungen_adj[3]);
-                //rb_adjektiv4.setText(endungen_adj[4]);
                 //Toast.makeText(getApplicationContext(),
                 //        "Ohne Artikel case", Toast.LENGTH_SHORT).show();
                 break;
@@ -408,5 +503,134 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(),
                         "FUCKING ERROR CASE", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void onRadioButtonArtikelClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.artikel1:
+                if (checked)
+                    rb_selectedArtikel= rb_artikel1.getText().toString();
+                break;
+            case R.id.artikel2:
+                if (checked)
+                    rb_selectedArtikel= rb_artikel2.getText().toString();
+                break;
+            case R.id.artikel3:
+                if (checked)
+                    rb_selectedArtikel= rb_artikel3.getText().toString();
+                break;
+            case R.id.artikel4:
+                if (checked)
+                    rb_selectedArtikel= rb_artikel4.getText().toString();
+                break;
+            case R.id.artikel5:
+                if (checked)
+                    rb_selectedArtikel= rb_artikel5.getText().toString();
+                break;
+            case R.id.artikel6:
+                if (checked)
+                    rb_selectedArtikel= rb_artikel6.getText().toString();
+                break;
+        }
+    }
+
+    public void onRadioButtonAdjektivClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.adjektiv1:
+                if (checked)
+                    rb_selectedAdjektiv= rb_adjektiv1.getText().toString();
+                break;
+            case R.id.adjektiv2:
+                if (checked)
+                    rb_selectedAdjektiv= rb_adjektiv2.getText().toString();
+                break;
+            case R.id.adjektiv3:
+                if (checked)
+                    rb_selectedAdjektiv= rb_adjektiv3.getText().toString();
+                break;
+            case R.id.adjektiv4:
+                if (checked)
+                    rb_selectedAdjektiv= rb_adjektiv4.getText().toString();
+                break;
+            case R.id.adjektiv5:
+                if (checked)
+                    rb_selectedAdjektiv= rb_adjektiv5.getText().toString();
+                break;
+        }
+    }
+
+    public void onRadioButtonSubstantivClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.substantiv1:
+                if (checked)
+                    rb_selectedSubstantiv= rb_substantiv1.getText().toString();
+                break;
+            case R.id.substantiv2:
+                if (checked)
+                    rb_selectedSubstantiv= rb_substantiv2.getText().toString();
+                break;
+            case R.id.substantiv3:
+                if (checked)
+                    rb_selectedSubstantiv= rb_substantiv3.getText().toString();
+                break;
+            case R.id.substantiv4:
+                if (checked)
+                    rb_selectedSubstantiv= rb_substantiv4.getText().toString();
+                break;
+        }
+    }
+
+    public void NextCase(){
+        sortStatistics();                                       //Sort MyStatistics
+        myCase = chooseCase();                                  //choose a case
+        artikel_case = statistics.get(myCase - 1).getArtikel(); // bes, unbes, ohne
+        kasus_case = statistics.get(myCase - 1).getKasus();     //nom, akk, gen, dat
+        genus_case = statistics.get(myCase - 1).getGenus();     // mask, fem, neu, pl
+
+        //Update the text views
+        tv_kasus0.setText(Integer.toString(myCase));
+        tv_kasus1.setText(artikel_case);
+        tv_kasus2.setText(kasus_case);
+        tv_kasus3.setText(genus_case);
+
+        //Update the radio buttons for artikel
+        setRadioButtons(myCase);
+
+        //Select a subtantiv
+        if(genus_case.equals("maskulinum")){               //{"maskulinum", "femininum", "neutrum", "plural"};
+            rdm_subs_id = myMaskulinenIds.get(random.nextInt(myMaskulinenIds.size()));
+            selected_sub = "der " + db.getSubstantiv(rdm_subs_id).getSubstantiv();
+        }
+        else if(genus_case.equals("femininum")){
+            rdm_subs_id = myFemininumIds.get(random.nextInt(myFemininumIds.size()));
+            selected_sub = "die " + db.getSubstantiv(rdm_subs_id).getSubstantiv();
+        }
+        else if(genus_case.equals("neutrum")){
+            rdm_subs_id = myNeutrumIds.get(random.nextInt(myNeutrumIds.size()));
+            selected_sub = "das " + db.getSubstantiv(rdm_subs_id).getSubstantiv();
+        }
+        else if(genus_case.equals("plural")){
+            rdm_subs_id = myPluralIds.get(random.nextInt(myPluralIds.size()));
+            selected_sub = "die " + db.getSubstantiv(rdm_subs_id).getSubstantiv();
+        }
+
+        //Select an adjektiv
+        selected_adj = db.getAdjektiv(random.nextInt(db.getAdjektivCount()) + 1).getAdjektiv();
+
+        //Update the substantiv and adjektiv text views
+        tv_substantiv.setText(selected_sub);
+        tv_adjektiv.setText(selected_adj);
     }
 }

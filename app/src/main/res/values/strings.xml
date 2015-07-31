@@ -198,54 +198,54 @@
     </string-array>
 
     <string-array name="my_dek_adj">
-        <item>e</item>
-        <item>e</item>
-        <item>e</item>
-        <item>en</item>
-        <item>en</item>
-        <item>e</item>
-        <item>e</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
-        <item>er</item>
-        <item>e</item>
-        <item>es</item>
+        <item>-e</item>
+        <item>-e</item>
+        <item>-e</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-e</item>
+        <item>-e</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-er</item>
+        <item>-e</item>
+        <item>-es</item>
         <item>-</item>
-        <item>en</item>
-        <item>e</item>
-        <item>es</item>
+        <item>-en</item>
+        <item>-e</item>
+        <item>-es</item>
         <item>-</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
         <item>-</item>
-        <item>en</item>
-        <item>en</item>
-        <item>en</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-en</item>
         <item>-</item>
-        <item>er</item>
-        <item>e</item>
-        <item>es</item>
-        <item>e</item>
-        <item>en</item>
-        <item>e</item>
-        <item>es</item>
-        <item>e</item>
-        <item>em</item>
-        <item>er</item>
-        <item>em</item>
-        <item>en</item>
-        <item>en</item>
-        <item>er</item>
-        <item>en</item>
-        <item>er</item>
+        <item>-er</item>
+        <item>-e</item>
+        <item>-es</item>
+        <item>-e</item>
+        <item>-en</item>
+        <item>-e</item>
+        <item>-es</item>
+        <item>-e</item>
+        <item>-em</item>
+        <item>-er</item>
+        <item>-em</item>
+        <item>-en</item>
+        <item>-en</item>
+        <item>-er</item>
+        <item>-en</item>
+        <item>-er</item>
     </string-array>
 
     <string-array name="my_dek_sub">
@@ -260,26 +260,10 @@
         <item>-</item>
         <item>-</item>
         <item>-</item>
-        <item>n</item>
-        <item>s</item>
+        <item>-n</item>
+        <item>-s</item>
         <item>-</item>
-        <item>es</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>-</item>
-        <item>s</item>
-        <item>-</item>
-        <item>es</item>
+        <item>-es</item>
         <item>-</item>
         <item>-</item>
         <item>-</item>
@@ -292,10 +276,26 @@
         <item>-</item>
         <item>-</item>
         <item>-</item>
-        <item>n</item>
-        <item>s</item>
         <item>-</item>
-        <item>es</item>
+        <item>-s</item>
+        <item>-</item>
+        <item>-es</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-</item>
+        <item>-n</item>
+        <item>-s</item>
+        <item>-</item>
+        <item>-es</item>
         <item>-</item>
     </string-array>
 

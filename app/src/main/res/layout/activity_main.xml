@@ -107,36 +107,42 @@
                     android:id="@+id/artikel1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonArtikelClicked"
                     android:text="der"/>
 
                 <RadioButton
                     android:id="@+id/artikel2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonArtikelClicked"
                     android:text="den"/>
 
                 <RadioButton
                     android:id="@+id/artikel3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonArtikelClicked"
                     android:text="dem"/>
 
                 <RadioButton
                     android:id="@+id/artikel4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonArtikelClicked"
                     android:text="des"/>
 
                 <RadioButton
                     android:id="@+id/artikel5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonArtikelClicked"
                     android:text="die"/>
 
                 <RadioButton
                     android:id="@+id/artikel6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonArtikelClicked"
                     android:text="das"/>
             </RadioGroup>
 
@@ -149,30 +155,35 @@
                     android:id="@+id/adjektiv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonAdjektivClicked"
                     android:text="-e"/>
 
                 <RadioButton
                     android:id="@+id/adjektiv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonAdjektivClicked"
                     android:text="-en"/>
 
                 <RadioButton
                     android:id="@+id/adjektiv3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonAdjektivClicked"
                     android:text="-"/>
 
                 <RadioButton
                     android:id="@+id/adjektiv4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonAdjektivClicked"
                     android:text="-"/>
 
                 <RadioButton
                     android:id="@+id/adjektiv5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonAdjektivClicked"
                     android:text="-"/>
             </RadioGroup>
 
@@ -185,35 +196,39 @@
                     android:id="@+id/substantiv1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonSubstantivClicked"
                     android:text="-s"/>
 
                 <RadioButton
                     android:id="@+id/substantiv2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonSubstantivClicked"
                     android:text="-es"/>
 
                 <RadioButton
                     android:id="@+id/substantiv3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonSubstantivClicked"
                     android:text="-"/>
 
                 <RadioButton
                     android:id="@+id/substantiv4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="onRadioButtonSubstantivClicked"
                     android:text="n"/>
             </RadioGroup>
         </LinearLayout>
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_hide"
-        android:text="Hide radio button!"
+        android:id="@+id/button_check"
+        android:text="Check!"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="HideRadioButton"/>
+        android:onClick="onButtonCheckClicked"/>
 
     <Button
         android:id="@+id/button_next"

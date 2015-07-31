@@ -99,6 +99,7 @@
             android:orientation="horizontal">
 
             <RadioGroup
+                android:id="@+id/radio_group_artikel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -147,6 +148,7 @@
             </RadioGroup>
 
             <RadioGroup
+                android:id="@+id/radio_group_adjektiv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -188,6 +190,7 @@
             </RadioGroup>
 
             <RadioGroup
+                android:id="@+id/radio_group_substantiv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -229,11 +232,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onButtonCheckClicked"/>
-
-    <Button
-        android:id="@+id/button_next"
-        android:text="next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>
